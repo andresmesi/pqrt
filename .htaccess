@@ -1,0 +1,67 @@
+RewriteEngine On
+RewriteBase /
+
+# Disable MultiViews to avoid ambiguities
+Options -MultiViews
+
+# Allow direct access to static resources (CSS, FontAwesome, JS, etc.)
+RewriteRule ^styles\.css$ - [L]
+RewriteRule ^fontawesome/css/all\.min\.css$ - [L]
+RewriteRule ^fontawesome/webfonts/.*$ - [L]
+RewriteRule ^js/toggle-mode\.js$ - [L]
+
+# Redirect profile pagination URLs to profile.php (highest priority)
+RewriteRule ^profile\.php/page-([0-9]+)/?$ profile.php?page=$1 [L,QSA]
+RewriteRule ^profile\.php$ profile.php [L]
+
+# Prevent rewriting for specific PHP files (post, db, functions, user, login, logout)
+RewriteRule ^(post|db|functions|user|login|logout)\.php(/|$) - [L]
+
+# Serve the root index directly if it exists, otherwise generate dynamically without parameters
+RewriteCond /webcp/docs/webs/267988/www/index.html -f
+RewriteRule ^$ index.html [L]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ post.php [L]
+
+# Redirect index pagination to the cached file if it exists
+RewriteCond /webcp/docs/webs/267988/www/cache/categories/page-$1.html -f
+RewriteRule ^page-([0-9]+)/?$ cache/categories/page-$1.html [L]
+
+# If the index pagination cache file doesn't exist, process dynamically with post.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^page-([0-9]+)/?$ post.php?page=$1 [L,QSA]
+
+# Redirect individual threads using the MD5 hash to the cached file if it exists
+RewriteCond /webcp/docs/webs/267988/www/cache/categories/$1/thread/$2.html -f
+RewriteRule ^([^/]+)/thread/([^/]+)/?$ cache/categories/$1/thread/$2.html [L]
+
+# If the thread cache doesn't exist, process dynamically with post.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/thread/([^/]+)/?$ post.php?category=$1&thread_hash=$2 [L,QSA]
+
+# Redirect user pages to the cached file if it exists
+RewriteCond /webcp/docs/webs/267988/www/cache/user/$1/page-$2.html -f
+RewriteRule ^user/([^/]+)/page-([0-9]+)/?$ cache/user/$1/page-$2.html [L]
+RewriteCond /webcp/docs/webs/267988/www/cache/user/$1/index.html -f
+RewriteRule ^user/([^/]+)/?$ cache/user/$1/index.html [L]
+
+# If the user cache doesn't exist, process dynamically with user.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^user/([^/]+)/?$ user.php?mailcryp=$1 [L,QSA]
+
+# Redirect category pagination pages to the cached file if it exists
+RewriteCond /webcp/docs/webs/267988/www/cache/categories/$1/page-$2.html -f
+RewriteRule ^([^/]+)/page-([0-9]+)/?$ cache/categories/$1/page-$2.html [L]
+
+# Redirect category root to the cached file if it exists, otherwise process dynamically
+RewriteCond /webcp/docs/webs/267988/www/cache/categories/$1/index.html -f
+RewriteRule ^([^/]+)/?$ cache/categories/$1/index.html [L]
+RewriteRule ^([^/]+)/?$ post.php?category=$1 [L,QSA]
+
+# If no other rule matches, serve index.html as a fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.html [L]

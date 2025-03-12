@@ -1,0 +1,346 @@
+/* styles.css */
+
+/**
+ * This stylesheet provides the base styling for the application.
+ * It includes styles for light and dark modes, responsive layouts, headers,
+ * forms, buttons, threads, pagination, and other components.
+ */
+
+/* Base Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f8f9fa;
+    color: #0f1419;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    line-height: 1.5;
+}
+
+/* Dark mode styles based on system preference */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #15202b;
+        color: #e1e8ed;
+    }
+}
+
+/* Manually applied dark mode */
+body.night {
+    background: #15202b !important;
+    color: #e1e8ed !important;
+    -webkit-transition: all 0.3s !important;
+    transition: all 0.3s !important;
+}
+
+/* Overrides using data-mode attribute */
+body[data-mode="night"] {
+    background: #15202b !important;
+    color: #e1e8ed !important;
+    -webkit-transition: all 0.3s !important;
+    transition: all 0.3s !important;
+}
+body[data-mode="day"] {
+    background: #f8f9fa !important;
+    color: #0f1419 !important;
+    -webkit-transition: all 0.3s !important;
+    transition: all 0.3s !important;
+}
+
+/* Header styles */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1da1f2;
+}
+@media (prefers-color-scheme: dark) {
+    h1 {
+        color: #1da1f2;
+    }
+}
+body.night h1 {
+    color: #1da1f2 !important;
+}
+h1 a.logo {
+    text-decoration: none;
+    color: #1da1f2;
+}
+@media (prefers-color-scheme: dark) {
+    h1 a.logo {
+        color: #1da1f2;
+    }
+}
+body.night h1 a.logo {
+    color: #1da1f2 !important;
+}
+
+/* Subheaders */
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #1c2022;
+}
+@media (prefers-color-scheme: dark) {
+    h2 {
+        color: #8899a6;
+    }
+}
+body.night h2 {
+    color: #8899a6 !important;
+}
+
+/* Post form styles */
+.post-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+@media (prefers-color-scheme: dark) {
+    .post-form {
+        background: #1c1f23;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+}
+body.night .post-form {
+    background: #1c1f23 !important;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Input and textarea fields */
+.input-field, .textarea-field {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #fff;
+    color: #0f1419;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+@media (prefers-color-scheme: dark) {
+    .input-field, .textarea-field {
+        border-color: #38444d;
+        background: #1c1f23;
+        color: #e1e8ed;
+    }
+}
+body.night .input-field, body.night .textarea-field {
+    border-color: #38444d !important;
+    background: #1c1f23 !important;
+    color: #e1e8ed !important;
+}
+.textarea-field {
+    height: 160px;
+    resize: vertical;
+    line-height: 1.4;
+    -webkit-appearance: none;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 20px;
+    background: #1da1f2;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px 0;
+    -webkit-appearance: none;
+    text-decoration: none;
+}
+.btn:hover {
+    background: #0d95e8;
+}
+
+/* Top-right button container */
+.top-buttons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.top-buttons .btn {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Thread and reply container styles */
+.thread, .reply {
+    background: #fff;
+    border: 1px solid #e1e8ed;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+    .thread, .reply {
+        background: #1c1f23;
+        border-color: #38444d;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+        -webkit-box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+}
+body.night .thread, body.night .reply {
+    background: #1c1f23 !important;
+    border-color: #38444d !important;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05) !important;
+    -webkit-box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05) !important;
+}
+.reply {
+    margin-left: 40px;
+}
+
+/* Tag styles */
+.tags {
+    font-size: 0.9em;
+    color: #657786;
+}
+@media (prefers-color-scheme: dark) {
+    .tags {
+        color: #8899a6;
+    }
+}
+body.night .tags {
+    color: #8899a6 !important;
+}
+
+/* Share section */
+.share {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.share .input-field {
+    padding: 8px;
+    margin-right: 10px;
+    width: 280px;
+    -webkit-appearance: none;
+}
+@media (prefers-color-scheme: dark) {
+    .share .input-field {
+        border-color: #38444d;
+    }
+}
+body.night .share .input-field {
+    border-color: #38444d !important;
+}
+.share a, .share .btn {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #1da1f2;
+    background: none;
+    padding: 0;
+    font-size: 18px;
+    -webkit-appearance: none;
+}
+@media (prefers-color-scheme: dark) {
+    .share a, .share .btn {
+        color: #1da1f2;
+    }
+}
+body.night .share a, body.night .share .btn {
+    color: #1da1f2 !important;
+}
+
+/* Pagination */
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #1da1f2;
+    font-size: 14px;
+    -webkit-appearance: none;
+}
+@media (prefers-color-scheme: dark) {
+    .pagination a {
+        border-color: #38444d;
+        color: #1da1f2;
+    }
+}
+body.night .pagination a {
+    border-color: #38444d !important;
+    color: #1da1f2 !important;
+}
+.pagination a.active {
+    background: #1da1f2;
+    color: #fff;
+}
+
+/* Categories section */
+.categories {
+    margin: 15px 0;
+    font-size: 16px;
+}
+.categories ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.categories li {
+    margin: 0;
+}
+.categories a {
+    color: #1da1f2;
+    text-decoration: none;
+    margin-right: 10px;
+    -webkit-appearance: none;
+}
+@media (prefers-color-scheme: dark) {
+    .categories a {
+        color: #1da1f2;
+    }
+}
+body.night .categories a {
+    color: #1da1f2 !important;
+}
+
+/* Image styling in threads and replies */
+.thread img, .reply img {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 0 10px 0;
+    border-radius: 5px;
+}
+
+/* Force left alignment in thread and reply containers */
+.thread, .reply {
+    text-align: left !important;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+}
+.footer-description {
+  text-align: center;
+}
